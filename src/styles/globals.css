@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Markdown styling */
+.markdown-content {
+  @apply inline;
+}
+
+.markdown-content strong {
+  @apply font-bold;
+}
+
+.markdown-content em {
+  @apply italic;
+}
+
+.markdown-content code {
+  @apply bg-muted px-1 py-0.5 rounded text-sm font-mono;
+}
+
+.markdown-content a {
+  @apply text-primary underline;
+}
+
+/* Ensure inline elements stay inline */
+.markdown-content p, 
+.markdown-content span, 
+.markdown-content strong, 
+.markdown-content em, 
+.markdown-content a, 
+.markdown-content code {
+  @apply inline;
+}
+
+/* Special class for inline markdown with links */
+.inline-markdown *,
+.inline-markdown div,
+.inline-markdown span {
+  display: inline !important;
+}
+
+/* Ensure truncation works with markdown content */
+.truncate-text p,
+.truncate-text span,
+.truncate-text strong,
+.truncate-text em,
+.truncate-text a,
+.truncate-text code {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  max-width: 100%;
+}
+
+/* Truncate text to a single line with ellipsis */
+.truncate-text {
+  @apply whitespace-nowrap overflow-hidden text-ellipsis;
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Markdown preview in dialog */
+.markdown-preview, .prose {
+  @apply text-sm;
+}
+
+.markdown-preview p, .prose p {
+  @apply mb-2;
+}
+
+.markdown-preview h1, .prose h1 {
+  @apply text-2xl font-bold mb-2;
+}
+
+.markdown-preview h2, .prose h2 {
+  @apply text-xl font-bold mb-2;
+}
+
+.markdown-preview h3, .prose h3 {
+  @apply text-lg font-bold mb-2;
+}
+
+.markdown-preview ul, .prose ul {
+  @apply list-disc pl-5 mb-2;
+}
+
+.markdown-preview ol, .prose ol {
+  @apply list-decimal pl-5 mb-2;
+}
+
+.markdown-preview li, .prose li {
+  @apply mb-1;
+}
+
+.markdown-preview a, .prose a {
+  @apply text-primary underline;
+}
+
+.markdown-preview code, .prose code {
+  @apply bg-muted px-1 py-0.5 rounded text-sm font-mono;
+}
+
+.markdown-preview pre, .prose pre {
+  @apply bg-muted p-2 rounded mb-2 overflow-x-auto;
+}
+
+.markdown-preview blockquote, .prose blockquote {
+  @apply border-l-4 border-muted pl-4 italic mb-2;
+}
+
+/* Global notes section */
+.prose, .full-markdown {
+  @apply text-foreground;
+}
+
+.prose p, .prose h1, .prose h2, .prose h3, 
+.prose ul, .prose ol, .prose li, 
+.prose a, .prose code, .prose pre, .prose blockquote,
+.full-markdown p, .full-markdown h1, .full-markdown h2, .full-markdown h3, 
+.full-markdown ul, .full-markdown ol, .full-markdown li, 
+.full-markdown a, .full-markdown code, .full-markdown pre, .full-markdown blockquote {
+  @apply block;
+}
+
+/* Override block display for inline markdown elements with higher specificity */
+.inline-markdown p, 
+.inline-markdown h1, 
+.inline-markdown h2, 
+.inline-markdown h3, 
+.inline-markdown ul, 
+.inline-markdown ol, 
+.inline-markdown li, 
+.inline-markdown a, 
+.inline-markdown code, 
+.inline-markdown pre, 
+.inline-markdown blockquote,
+.inline-markdown span,
+.inline-markdown strong,
+.inline-markdown em {
+  display: inline !important;
+}
+
+/* Additional Markdown elements for full Markdown support */
+.full-markdown table {
+  @apply border-collapse border border-border my-2 w-full;
+}
+
+.full-markdown th {
+  @apply border border-border bg-muted p-2 text-left font-semibold;
+}
+
+.full-markdown td {
+  @apply border border-border p-2;
+}
+
+.full-markdown hr {
+  @apply my-4 border-t border-border;
+}
+
+.full-markdown img {
+  @apply max-w-full h-auto my-2;
+}
+
+.full-markdown input[type="checkbox"] {
+  @apply mr-2;
+}
+
+.full-markdown del {
+  @apply line-through;
+}
+
+/* Animation for last modified todo */
+@keyframes pulse-subtle {
+  0% { background-color: hsl(var(--primary) / 0.05); }
+  50% { background-color: hsl(var(--primary) / 0.15); }
+  100% { background-color: hsl(var(--primary) / 0.05); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Drag and drop styles */
+.draggable-todo-item {
+  transition: background-color 0.2s ease;
+  touch-action: none;
+}
+
+.draggable-todo-item:hover {
+  background-color: hsl(var(--accent) / 0.1);
+  border-radius: 0.375rem;
+}
+
+.draggable-todo-item.dragging {
+  opacity: 0.5;
+  z-index: 999;
+}
+
+/* Nesting visual indicators */
+.todo-item {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add hover effect to highlight the nesting lines */
+.todo-item:hover > div > .nesting-line {
+  background-color: hsl(var(--primary) / 0.3);
+}
+
+/* Ensure the todo content is above the nesting lines */
+.todo-item > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* Add transition for smooth hover effects */
+.nesting-line {
+  transition: background-color 0.2s ease;
+}
+
+/* Progress bar styling */
+.progress-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Custom progress bar colors based on completion percentage */
+.progress-low [data-radix-progress-indicator] {
+  background: linear-gradient(90deg, hsl(var(--destructive)/0.8) 0%, hsl(var(--destructive)/0.6) 100%);
+}
+
+.progress-medium [data-radix-progress-indicator] {
+  background: linear-gradient(90deg, hsl(var(--warning)/0.8) 0%, hsl(var(--warning)/0.6) 100%);
+}
+
+.progress-high [data-radix-progress-indicator] {
+  background: linear-gradient(90deg, hsl(var(--success)/0.8) 0%, hsl(var(--success)/0.6) 100%);
+}
+
+.progress-complete [data-radix-progress-indicator] {
+  background: linear-gradient(90deg, hsl(var(--success)/1) 0%, hsl(var(--success)/0.8) 100%);
+}
+
+#root-drop-area {
+  min-height: 100px;
+  position: relative;
+}
+
+:root {
+  --mode: dark;
+}
+
+/* Theme: zinc */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Text size classes */
+.text-size-small .todo-item {
+  font-size: 0.875rem;
+}
+
+.text-size-small .draggable-todo-item {
+  margin-bottom: 0.125rem;
+}
+
+.text-size-small .todo-item > div {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
+.text-size-medium .todo-item {
+  font-size: 1rem;
+}
+
+.text-size-medium .draggable-todo-item {
+  margin-bottom: 0.25rem;
+}
+
+.text-size-medium .todo-item > div {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.text-size-large .todo-item {
+  font-size: 1.125rem;
+}
+
+.text-size-large .draggable-todo-item {
+  margin-bottom: 0.5rem;
+}
+
+.text-size-large .todo-item > div {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
